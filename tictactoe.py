@@ -77,10 +77,11 @@ def winner(board):
             return board[0][i]
         
     if board[1][1] != EMPTY and ((board[0][0] == board[1][1] and board[1][1] == board[2][2]) or 
-         (board[2][0] == board[1][1] and board[0][2] == board[1][1])):
+                                 (board[2][0] == board[1][1] and board[0][2] == board[1][1])):
         return board[1][1]
     
     return None
+
 
 def terminal(board):
     """
@@ -107,6 +108,7 @@ def utility(board):
         return -1
     else:
         return 0
+    
 
 def is_filled(board):
     """
@@ -118,6 +120,7 @@ def is_filled(board):
                 return False
             
     return True
+
 
 def minimax(board):
     """
@@ -136,6 +139,7 @@ def minimax(board):
 
     return move
 
+
 def alpha_beta(board, alpha, beta, maximizing):
     """
     Returns the optimal action for the current player on the board
@@ -147,14 +151,14 @@ def alpha_beta(board, alpha, beta, maximizing):
     # spawn children
     children = list()
     for action in actions(board):
-        children.append(( result(board, action), action ))
+        children.append((result(board, action), action))
 
     move = None
     if maximizing:
         value = -2
         for child in children:
             # update max for curr
-            curr =  alpha_beta(child[0], alpha, beta, False)
+            curr = alpha_beta(child[0], alpha, beta, False)
             if curr[0] > value:
                 value = curr[0]
                 move = child[1]
@@ -173,14 +177,9 @@ def alpha_beta(board, alpha, beta, maximizing):
                 break
             beta = min(beta, value)
 
-
     # if maximizing:
     #     print(f"max move: {move} with value: {value} for board {board}")
     # else:
     #     print(f"min move: {move} with value: {value} for board {board}")
 
     return (value, move)
-        
-        
-    
-    
